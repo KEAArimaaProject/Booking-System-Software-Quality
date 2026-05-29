@@ -53,5 +53,43 @@ jobs:
       - name: Make Maven wrapper executable
         run: chmod +x mvnw
 
-      - name: Run unit and integration tests
-        run: ./mvnw test -Dtest='BookingValidatorTest,BookingServiceTest,WeatherClientIntegrationTest,BookingRepositoryIntegrationTest,BookingControllerIntegrationTest'
+      - name: Run all unit and integration tests with coverage check
+        run: ./mvnw -B verify
+
+      - name: Start Spring Boot Application
+        run: ./mvnw spring-boot:start -Dspring-boot.run.profiles=test
+
+      - name: Wait for Spring Boot Application to be ready
+        run: |
+          until curl -s http://localhost:8080/actuator/health | grep '"status":"UP"'; do
+            echo "Waiting for application to be ready..."
+            sleep 5
+          done
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright API tests
+        run: npm test
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run k6 performance tests
+        run: |
+          k6 run performance/load-test.js
+          k6 run performance/spike-test.js
+          k6 run performance/stress-test.js
+
+      - name: Stop Spring Boot Application
+        if: always()
+        run: ./mvnw spring-boot:stop
