@@ -6,6 +6,7 @@
 
 
 [Jacoco Documentation](READMEfiles/Jacoco.md)
+[SonarCloud Integration Guide](READMEfiles/SonarCloud.md)
 
 
 

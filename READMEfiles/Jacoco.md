@@ -1,8 +1,15 @@
 
+[README](../README.md)
+
+# Jacoco Readme
+
+## Jacoco version
 The jacoco version can be found in the file `pom.xml`:
 <groupId>org.jacoco</groupId>
 <artifactId>jacoco-maven-plugin</artifactId>
 <version>0.8.12</version>
+
+## Run Jacococ
 
 - Commands in the project root:
   `./mvnw verify`
@@ -20,7 +27,8 @@ target/site/jacoco/index.html
 - you then get a stat like this:
   ![img.png](jacocoresults.png)
 
-Here is an explanation:
+## Jacoco results explanation
+
 Missed Instructions	Cov.:
 (The smallest unit of Java bytecode)
 
