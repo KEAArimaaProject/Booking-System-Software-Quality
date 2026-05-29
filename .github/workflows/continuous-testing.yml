@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@3a4f283450a63ff5390097f465cb50b05d1565d0 # v4.7.0
+        uses: actions/setup-java@3a4f6e1afccf81491795ba4224095815be122485 # v4.7.0
         with:
           distribution: temurin
           java-version: "21"
