@@ -1,6 +1,5 @@
 package com.EKGroup.booking_system.validation;
 
-import com.EKGroup.booking_system.config.TimeSlotConfig;
 import com.EKGroup.booking_system.dto.CreateBookingRequest;
 import com.EKGroup.booking_system.exception.ValidationException;
 import org.springframework.stereotype.Component;
