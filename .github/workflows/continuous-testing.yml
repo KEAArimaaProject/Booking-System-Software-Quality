@@ -41,10 +41,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@3a4f283450a63ff5390097f465cb50b05d1565d0 # v4.7.0
         with:
           distribution: temurin
           java-version: "21"
@@ -67,22 +67,22 @@ jobs:
           done
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@1d112162831551048633856d11f6785645396144 # v4.2.0
         with:
           node-version: '20'
           cache: 'npm'
 
       - name: Install Node.js dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: npx playwright@1.60.0 install --with-deps --ignore-scripts
 
       - name: Run Playwright API tests
         run: npm test
 
       - name: Setup k6
-        uses: grafana/setup-k6-action@v1
+        uses: grafana/setup-k6-action@ab655554628e461234479e3776b26cf543666d93 # v1.1.0
 
       - name: Run k6 performance tests
         run: |
