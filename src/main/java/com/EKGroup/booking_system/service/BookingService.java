@@ -32,13 +32,14 @@ public class BookingService {
             ActivityRepository activityRepository,
             BookingRepository bookingRepository,
             BookingValidator bookingValidator,
-            WeatherService weatherService
+            WeatherService weatherService,
+            Clock clock
     ) {
         this.activityRepository = activityRepository;
         this.bookingRepository = bookingRepository;
         this.bookingValidator = bookingValidator;
         this.weatherService = weatherService;
-        this.clock = Clock.system(TimeSlotConfig.BOOKING_ZONE);
+        this.clock = clock;
     }
 
     @Transactional

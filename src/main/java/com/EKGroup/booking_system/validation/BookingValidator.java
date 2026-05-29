@@ -14,10 +14,6 @@ public class BookingValidator {
     private final List<java.time.LocalTime> allowedTimeSlots;
     private final Clock clock;
 
-    public BookingValidator(List<java.time.LocalTime> allowedTimeSlots) {
-        this(allowedTimeSlots, Clock.system(TimeSlotConfig.BOOKING_ZONE));
-    }
-
     public BookingValidator(List<java.time.LocalTime> allowedTimeSlots, Clock clock) {
         this.allowedTimeSlots = allowedTimeSlots;
         this.clock = clock;

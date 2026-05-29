@@ -1,8 +1,10 @@
 package com.EKGroup.booking_system.unit.service;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -53,14 +55,17 @@ class BookingServiceTest {
     private WeatherService weatherService;
 
     private BookingService bookingService;
+    private Clock clock;
 
     @BeforeEach
     void setUp() {
+        clock = Clock.system(ZoneId.of("Europe/Copenhagen"));
         bookingService = new BookingService(
                 activityRepository,
                 bookingRepository,
                 bookingValidator,
-                weatherService
+                weatherService,
+                clock
         );
     }
 

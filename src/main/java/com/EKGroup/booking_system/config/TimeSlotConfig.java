@@ -3,6 +3,7 @@ package com.EKGroup.booking_system.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Clock;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -11,6 +12,11 @@ import java.util.List;
 public class TimeSlotConfig {
 
     public static final ZoneId BOOKING_ZONE = ZoneId.of("Europe/Copenhagen");
+
+    @Bean
+    public Clock clock() {
+        return Clock.system(BOOKING_ZONE);
+    }
 
     @Bean
     public List<LocalTime> allowedTimeSlots() {
