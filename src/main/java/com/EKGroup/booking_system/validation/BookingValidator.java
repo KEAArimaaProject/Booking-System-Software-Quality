@@ -15,8 +15,12 @@ public class BookingValidator {
     private final Clock clock;
 
     public BookingValidator(List<java.time.LocalTime> allowedTimeSlots) {
+        this(allowedTimeSlots, Clock.system(TimeSlotConfig.BOOKING_ZONE));
+    }
+
+    public BookingValidator(List<java.time.LocalTime> allowedTimeSlots, Clock clock) {
         this.allowedTimeSlots = allowedTimeSlots;
-        this.clock = Clock.system(TimeSlotConfig.BOOKING_ZONE);
+        this.clock = clock;
     }
 
     public void validateRequest(CreateBookingRequest request) {
