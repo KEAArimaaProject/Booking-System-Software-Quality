@@ -5,8 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.net.URI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
 
 import com.EKGroup.booking_system.config.WeatherApiProperties;
 import com.EKGroup.booking_system.dto.WeatherApiResponse;
@@ -15,6 +18,7 @@ import com.EKGroup.booking_system.model.WeatherSnapshot;
 
 @Component
 public class WeatherClientImpl implements WeatherClient {
+    private static final Logger logger = LoggerFactory.getLogger(WeatherClientImpl.class);
     private final WeatherApiProperties weatherApiProperties;
     private final RestClient restClient;
 
@@ -28,13 +32,19 @@ public class WeatherClientImpl implements WeatherClient {
         String apiKey = weatherApiProperties.key();
         String location = weatherApiProperties.location();
 
-        var response = restClient.get()
-            .uri(uriBuilder -> uriBuilder.path("/current.json")
-            .queryParam("key", apiKey)
-            .queryParam("q", location)
-            .build())
-        .retrieve()
-        .body(WeatherApiResponse.class);
+        WeatherApiResponse response;
+        try {
+            response = restClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/current.json")
+                .queryParam("key", apiKey)
+                .queryParam("q", location)
+                .build())
+            .retrieve()
+            .body(WeatherApiResponse.class);
+        } catch (RestClientException e) {
+            logger.error("Failed to call weather API: {}", e.getMessage());
+            throw new WeatherUnavailableException("Weather API call failed: " + e.getMessage());
+        }
 
         if(response == null) { 
             throw new WeatherUnavailableException("Empty response from weather API");
@@ -52,7 +62,7 @@ public class WeatherClientImpl implements WeatherClient {
             throw new WeatherUnavailableException("Weather API response is missing required weather measurements.");
         }
 
-        double windMs = response.current().windKph() * 1000 / 60;
+        double windMs = response.current().windKph() / 3.6;
         double temperatureC = response.current().tempC();
         int cloudCoveragePercent = (int) Math.round(response.current().cloud());
 
