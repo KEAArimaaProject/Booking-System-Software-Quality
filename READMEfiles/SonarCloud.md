@@ -41,6 +41,19 @@ You can run the analysis locally using Maven. To avoid manually typing your toke
 
 The analysis will automatically pick up the JaCoCo coverage reports generated during the `verify` phase.
 
+## Change new-code coverage in sonar cloud
+When we push code to main in gituhb, we run code coverage of the whole 
+project through jacoco. In addition, sonar uses jacoco to 
+analyse the new code changes that we try to merge. The coverage
+requirement for the new code is 80% by default, can not be set here in the code.
+The default is called "Sonar way" and can not be changed 
+as long as we are on the free plan. It can be seen here:
+- https://sonarcloud.io/project/overview?id=KEAArimaaProject_Booking-System-Software-Quality
+- In the left menu, click on "Quality gate" (under the policy section)
+- Here, you can see that our current default is "Sonar way".
+
+
+
 ## Configuration Details
 
 ### Maven Configuration (`pom.xml`)
@@ -60,3 +73,5 @@ The secrets are set in github here:
 - Go to Secrets and variables In the left sidebar, click on Secrets and variables → Actions
 - Click the New repository secret button (green button on the right).
 - the SONAR_TOKEN secret and its value was added here.
+
+

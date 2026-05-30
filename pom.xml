@@ -32,6 +32,15 @@
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.projectKey>KEAArimaaProject_Booking-System-Software-Quality</sonar.projectKey>
 		<sonar.scanner.skipJreProvisioning>true</sonar.scanner.skipJreProvisioning>
+		<sonar.exclusions>
+			**/dto/**,
+			**/model/**,
+			**/config/**,
+			**/BookingSystemApplication.*
+		</sonar.exclusions>
+		<sonar.coverage.jacoco.xmlReportPaths>
+			target/site/jacoco/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<dependencies>
 
