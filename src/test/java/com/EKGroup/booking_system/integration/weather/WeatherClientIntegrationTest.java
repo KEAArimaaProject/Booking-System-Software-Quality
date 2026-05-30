@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestClientResponseException;
 
 import com.EKGroup.booking_system.client.weather.WeatherClientImpl;
 import com.EKGroup.booking_system.config.WeatherApiProperties;
+import com.EKGroup.booking_system.exception.WeatherUnavailableException;
 import com.EKGroup.booking_system.model.WeatherSnapshot;
 
 class WeatherClientIntegrationTest {
@@ -57,7 +59,7 @@ class WeatherClientIntegrationTest {
         WeatherSnapshot result = weatherClient.getWeather(LocalDate.now(), LocalTime.NOON);
 
         assertEquals(21.2, result.temperatureC());
-        assertEquals(300.0, result.windSpeedMs());
+        assertEquals(5.0, result.windSpeedMs());
         assertEquals(33, result.cloudCoveragePercent());
         assertEquals(Instant.ofEpochSecond(1710000000), result.timestamp());
         mockServer.verify();
@@ -68,9 +70,9 @@ class WeatherClientIntegrationTest {
         mockServer.expect(requestTo("https://weather.example/current.json?key=test-api-key&q=London"))
                 .andRespond(withServerError());
 
-        RestClientResponseException exception = assertThrows(RestClientResponseException.class,
+        WeatherUnavailableException exception = assertThrows(WeatherUnavailableException.class,
                 () -> weatherClient.getWeather(LocalDate.now(), LocalTime.NOON));
-        assertEquals(500, exception.getStatusCode().value());
+        assertTrue(exception.getMessage().contains("500 Internal Server Error"));
         mockServer.verify();
     }
 }
