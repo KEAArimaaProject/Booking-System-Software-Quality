@@ -18,7 +18,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestClientResponseException;
 
 import com.EKGroup.booking_system.client.weather.WeatherClientImpl;
 import com.EKGroup.booking_system.config.WeatherApiProperties;
@@ -70,8 +69,10 @@ class WeatherClientIntegrationTest {
         mockServer.expect(requestTo("https://weather.example/current.json?key=test-api-key&q=London"))
                 .andRespond(withServerError());
 
+        LocalDate date = LocalDate.of(2024, 5, 30);
+        LocalTime time = LocalTime.NOON;
         WeatherUnavailableException exception = assertThrows(WeatherUnavailableException.class,
-                () -> weatherClient.getWeather(LocalDate.now(), LocalTime.NOON));
+                () -> weatherClient.getWeather(date, time));
         assertTrue(exception.getMessage().contains("500 Internal Server Error"));
         mockServer.verify();
     }
