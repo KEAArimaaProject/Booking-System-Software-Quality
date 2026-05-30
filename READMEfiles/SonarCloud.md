@@ -53,7 +53,6 @@ as long as we are on the free plan. It can be seen here:
 - Here, you can see that our current default is "Sonar way".
 
 
-
 ## Configuration Details
 
 ### Maven Configuration (`pom.xml`)
