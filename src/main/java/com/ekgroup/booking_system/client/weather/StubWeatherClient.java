@@ -13,8 +13,8 @@ import com.ekgroup.booking_system.model.WeatherSnapshot;
 
 @Component
 @Profile("test")
-public class MockWeatherClient implements WeatherClient {
-    private static final Logger logger = LoggerFactory.getLogger(MockWeatherClient.class);
+public class StubWeatherClient implements WeatherClient {
+    private static final Logger logger = LoggerFactory.getLogger(StubWeatherClient.class);
 
     @Override
     public WeatherSnapshot getWeather(LocalDate date, LocalTime time) {
