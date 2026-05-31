@@ -2,6 +2,7 @@ package com.ekgroup.booking_system.service;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -96,6 +97,13 @@ public class BookingService {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new NotFoundException("Booking not found: " + bookingId));
         return toResponse(booking);
+    }
+
+    @Transactional(readOnly = true)
+    public List<BookingResponse> getAllBookings() {
+        return bookingRepository.findAll().stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     @Transactional

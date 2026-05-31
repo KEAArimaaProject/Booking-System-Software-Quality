@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,6 +36,11 @@ public class BookingController {
     @GetMapping("/{bookingId}")
     public BookingResponse getBooking(@PathVariable UUID bookingId) {
         return bookingService.getBooking(bookingId);
+    }
+
+    @GetMapping
+    public List<BookingResponse> getAllBookings() {
+        return bookingService.getAllBookings();
     }
 
     @DeleteMapping("/{bookingId}")
