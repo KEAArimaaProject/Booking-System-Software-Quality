@@ -3,6 +3,9 @@
 3. docker compose -f docker-compose.psql.yml up -d
 4. mvn spring-boot:run or .\mvnw.cmd spring-boot:run
 
+take the database down:docker compose -f docker-compose.psql.yml down --volumes --remove-orphans
+``
+
 - Run all tests in the terminal root:
 `scripts/run-all-tests.ps1`
 
@@ -17,4 +20,11 @@ For checking postrgres-db:
 5. To get all bookings: SELECT * FROM bookings;
 6. To exit: \q
 
+
+## Weather API:
+1. Go to https://www.weatherapi.com/signup.aspx.
+2. Sign up for a free account.
+3. Once logged in, go to your Dashboard.
+4. Copy your API Key
+the add the API key to the .env file.
 
