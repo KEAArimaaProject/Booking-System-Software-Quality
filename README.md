@@ -3,8 +3,11 @@
 3. docker compose -f docker-compose.psql.yml up -d
 4. mvn spring-boot:run or .\mvnw.cmd spring-boot:run
 
-take the database down:docker compose -f docker-compose.psql.yml down --volumes --remove-orphans
-``
+take the database down and set it up again:
+`
+docker compose -f .\database\docker-compose.psql.yml down --volumes --remove-orphans
+docker compose -f .\database\docker-compose.psql.yml up -d
+`
 
 - Run all tests in the terminal root:
 `scripts/run-all-tests.ps1`
