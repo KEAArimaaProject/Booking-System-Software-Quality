@@ -31,3 +31,7 @@ For checking postrgres-db:
 4. Copy your API Key
 the add the API key to the .env file.
 
+
+
+--- Tests ci -- to be deleted
+
