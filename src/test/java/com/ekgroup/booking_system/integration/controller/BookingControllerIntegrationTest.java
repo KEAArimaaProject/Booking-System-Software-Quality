@@ -40,7 +40,7 @@ class BookingControllerIntegrationTest {
     private BookingService bookingService;
 
     @Test
-    void TC_INT_CTRL_001_createBooking_validRequest_returnsCreatedBookingJson() throws Exception {
+    void TC_INT_CTRL_BKG_001_createBooking_validRequest_returnsCreatedBookingJson() throws Exception {
         BookingResponse response = new BookingResponse(
                 UUID.fromString("11111111-1111-1111-1111-111111111111"),
                 1L,
@@ -80,7 +80,7 @@ class BookingControllerIntegrationTest {
     }
 
     @Test
-    void TC_INT_CTRL_002_getBooking_unknownId_returnsNotFoundProblemDetail() throws Exception {
+    void TC_INT_CTRL_BKG_002_getBooking_unknownId_returnsNotFoundProblemDetail() throws Exception {
         UUID bookingId = UUID.fromString("22222222-2222-2222-2222-222222222222");
 
         Mockito.when(bookingService.getBooking(eq(bookingId)))
@@ -93,7 +93,7 @@ class BookingControllerIntegrationTest {
     }
 
     @Test
-    void TC_INT_CTRL_003_createBooking_invalidPayload_returnsBadRequestProblemDetail() throws Exception {
+    void TC_INT_CTRL_BKG_003_createBooking_invalidPayload_returnsBadRequestProblemDetail() throws Exception {
         mockMvc.perform(post("/api/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -111,7 +111,7 @@ class BookingControllerIntegrationTest {
     }
 
     @Test
-    void TC_INT_CTRL_004_cancelBooking_returnsCancelledResponse() throws Exception {
+    void TC_INT_CTRL_BKG_004_cancelBooking_returnsCancelledResponse() throws Exception {
         UUID bookingId = UUID.fromString("33333333-3333-3333-3333-333333333333");
         BookingResponse cancelled = new BookingResponse(
                 bookingId,
