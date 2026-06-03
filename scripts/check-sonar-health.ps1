@@ -118,7 +118,7 @@ $tempFile = New-TemporaryFile
 
 if ($LASTEXITCODE -eq 0) {
     Write-Status "SonarCloud Analysis SUCCESSFUL" $true
-    Write-Host "`nResults can be found at: https://sonarcloud.io/dashboard?id=KEAArimaaProject_Booking-System-Software-Quality" -ForegroundColor Cyan
+    Write-Host "`nResults can be found at: https://sonarcloud.io/dashboard?id=cmlykke_Booking-System-Software-Quality" -ForegroundColor Cyan
     Write-Host "`nYou should have access, if you have access to the projects github (use github to sign in to Sonar Qube Cloud)"
 } else {
     $logs = Get-Content $tempFile.FullName
@@ -127,7 +127,7 @@ if ($LASTEXITCODE -eq 0) {
         Write-Host "`n[FIX REQUIRED] SonarCloud Automatic Analysis is enabled." -ForegroundColor Red
         Write-Host "Manual (Maven) analysis is blocked by SonarCloud when Automatic Analysis is active." -ForegroundColor Red
         Write-Host "`nTo fix this:" -ForegroundColor Yellow
-        Write-Host "1. Go to: https://sonarcloud.io/project/configuration?id=KEAArimaaProject_Booking-System-Software-Quality&analysisMode" -ForegroundColor Yellow
+        Write-Host "1. Go to: https://sonarcloud.io/project/configuration?id=cmlykke_Booking-System-Software-Quality&analysisMode" -ForegroundColor Yellow
         Write-Host "2. OR: Administration > Analysis Method" -ForegroundColor Yellow
         Write-Host "3. Turn OFF 'Automatic Analysis'" -ForegroundColor Yellow
         Write-Host "4. Re-run this script.`n" -ForegroundColor Yellow
