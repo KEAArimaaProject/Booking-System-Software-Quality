@@ -15,7 +15,7 @@ This project is integrated with [SonarCloud](https://sonarcloud.io/) to check co
 - Log in to [SonarCloud](https://sonarcloud.io/).
 - Organization and project key:
 - Organization: `keaarimaaproject` (lowercase, as per SonarCloud API).
-- Project Key: `KEAArimaaProject_Booking-System-Software-Quality`.
+- Project Key: `cmlykke_Booking-System-Software-Quality`.
 
 ### 2. GitHub Secrets
 To enable automatic analysis via GitHub Actions, ensure you have added the following secret to your GitHub repository:
@@ -35,7 +35,7 @@ You can run the analysis locally using Maven. To avoid manually typing your toke
 - **Database Connectivity:** Since `verify` runs integration tests, if your PostgreSQL database (on port 5434 as per `.env`) is not running, the process will fail with connection errors. Ensure your database is active before running the scan.
 - **Automatic Analysis Conflict:** If you see an error about "Automatic Analysis" being enabled, you must go to **SonarCloud UI > Administration > Analysis Method** and disable "Automatic Analysis" to allow local Maven scans.
   - **Error Message:** `[ERROR] You are running manual analysis while Automatic Analysis is enabled. Please consider disabling one or the other.`
-  - **Direct Link:** [SonarCloud Analysis Method](https://sonarcloud.io/project/configuration?id=KEAArimaaProject_Booking-System-Software-Quality&analysisMode) (Replace with your project key if different)
+  - **Direct Link:** [SonarCloud Analysis Method](https://sonarcloud.io/project/configuration?id=cmlykke_Booking-System-Software-Quality&analysisMode) (Replace with your project key if different)
 - **Batch Mode:** Always use the `-B` flag in CI/CD or scripts to ensure Maven doesn't stop to ask for input.
 - **Debug Logs:** If it still hangs, add `-X` to the Maven command to see the full debug output.
 
@@ -48,7 +48,7 @@ analyse the new code changes that we try to merge. The coverage
 requirement for the new code is 80% by default, can not be set here in the code.
 The default is called "Sonar way" and can not be changed 
 as long as we are on the free plan. It can be seen here:
-- https://sonarcloud.io/project/overview?id=KEAArimaaProject_Booking-System-Software-Quality
+- https://sonarcloud.io/project/overview?id=cmlykke_Booking-System-Software-Quality
 - In the left menu, click on "Quality gate" (under the policy section)
 - Here, you can see that our current default is "Sonar way".
 
@@ -59,7 +59,7 @@ as long as we are on the free plan. It can be seen here:
 The following properties are configured:
 - `sonar.organization`: `KEAArimaaProject`
 - `sonar.host.url`: `https://sonarcloud.io`
-- `sonar.projectKey`: `KEAArimaaProject_Booking-System-Software-Quality`
+- `sonar.projectKey`: `cmlykke_Booking-System-Software-Quality`
 
 The `sonar-maven-plugin` is added to the `<build><plugins>` section.
 
